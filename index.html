@@ -14,14 +14,29 @@
         <div class="modal-content" >
             
             <form id="newBookForm">
-                <label for="bookName">Book Name:</label>
-                <input id="bookName" type="text">
-                <label for="authorName">Author:</label>
-                <input id="authorName" type="text">
-                <label for="pageCount">Page Count:</label>
-                <input id="pageCount" type="number">
-                <label for="readStatus">Read:</label>
-                <input id="readStatus" type="checkbox">
+                <div class="inputContainer">
+                    <label for="bookName">Book Name:</label>
+                    <input id="bookName" type="text">
+                </div>
+                <div class="inputContainer">
+                    <label for="authorName">Author:</label>
+                    <input id="authorName" type="text">
+                </div>
+                <div class="inputContainer">
+                    <label for="pageCount">Page Count:</label>
+                    <input id="pageCount" type="number">
+                </div>
+                <div class="inputContainer">
+                    <label for="readStatus">Read:</label>
+                    <input id="readStatus" type="checkbox">
+                </div>
+                <div class="inputContainer">
+
+                </div>
+                
+                
+                
+                
                 <button id="submitNewBook" type="submit">Submit</button>
             </form>
             <div id="closeContainer">
@@ -34,7 +49,9 @@
     <div id="application-container">
         <button id="newBook" class="toggleModal">New Book</button>
         <div id="bookContainer">
-            <div class="card"></div>
+            <div class="card">
+
+            </div>
             <div class="card"></div>
             <div class="card"></div>
         </div>
