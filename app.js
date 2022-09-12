@@ -64,7 +64,7 @@ function getFormInput(event){
     const book = this.bookName.value;
     const author = this.authorName.value;
     const pages = this.pageCount.value;
-    const read = this.readStatus.checked;
+    const read = this.readStatus.value;
 
     //we now need to 1. add book, 2. get rid of the modal and 3. display book
     addBookToLibrary(book, author, pages, read);

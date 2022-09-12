@@ -16,7 +16,6 @@ body {
 .inputContainer {
     display: flex;
     flex-flow: column-reverse;
-
     padding: 5px;
 
 }
@@ -29,7 +28,7 @@ label {
     margin-bottom: 2px;
 }
 
-input {
+input, select {
     width: 200px;
     border: none;
     border-bottom: 1px solid #bcb9b9;
