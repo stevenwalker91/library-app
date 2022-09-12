@@ -3,12 +3,14 @@ const myform = document.getElementById('newBookForm');
 const modalToggles = document.querySelectorAll('.toggleModal')
 const closeBtn = document.getElementById('closeModal');
 const newFormBtn = document.getElementById('newBook');
+const clearBtn = document.getElementById('clearForm');
 
 //event listeners to handle inputs
 myform.addEventListener('submit', getFormInput);
 closeBtn.addEventListener('click', hideModal);
 newFormBtn.addEventListener('click', displayModal);
 window.addEventListener('keydown', handleKeyboardInput);
+clearBtn.addEventListener('click', clearForm);
 
 let myLibrary = [];
 

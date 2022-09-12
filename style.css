@@ -49,10 +49,12 @@ input:required+label:after{
     font-size: 11px;
 }
 
-button {
-    
-    cursor: pointer;
+.btnContainer {
+    margin-top: 15px;
+}
 
+button {
+    cursor: pointer;
     color: var(--primary-color);
     padding: 10px 25px;
     font-weight: bold;
