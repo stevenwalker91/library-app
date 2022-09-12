@@ -2,7 +2,6 @@
     --primary-color: rgb(38, 131, 198);
     --error-color-primary: rgb(190, 35, 35);
     --error-color-secondary: rgb(249, 133, 133);
-
 }
 
 body {
@@ -36,7 +35,7 @@ input {
     border-bottom: 1px solid #bcb9b9;
 }
 
-input:invalid:not{
+input:invalid:not(:placeholder-shown) {
   border-bottom:1px solid var(--error-color-primary);
 }
 
@@ -52,16 +51,25 @@ input:required+label:after{
 }
 
 button {
-    background-color: white;
-    box-shadow: none;
+    
     cursor: pointer;
-    border: 2px solid var(--primary-color);
+
     color: var(--primary-color);
     padding: 10px 25px;
     font-weight: bold;
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+}
 
+.primary-btn {
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: white;
+}
+
+.secondary-btn {
+    border: 2px solid var(--primary-color);
+    background-color: white;
 }
 
 .body-blur {
@@ -113,7 +121,6 @@ button {
     background-color: white;
     height: 125px;
     border-radius: 5px;
-    border-left: 6px solid lightseagreen;
     box-shadow: 1px 1px 6px 0px rgb(0 0 0 / 25%);
     padding: 10px;
 }
