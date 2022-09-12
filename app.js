@@ -152,7 +152,7 @@ function deleteBook(reference) {
     const table = document.getElementById('bookList');
     const bookid = `book-${reference}`
 
-    if (confirm('are you sure you wwant to delete?')) {
+    if (confirm(`Are you sure you want to delete ${myLibrary[reference].title}?`)) {
         //remove the book from library
         myLibrary.splice(reference, 1);
 
