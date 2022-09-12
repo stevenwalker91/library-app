@@ -112,16 +112,27 @@ button {
 }
 
 #bookContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: flex;;
+    justify-content: center;
     padding: 15px;
     gap: 15px;
 }
 
-.card {
-    background-color: white;
-    height: 125px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 6px 0px rgb(0 0 0 / 25%);
-    padding: 10px;
+#bookList {
+
+}
+
+table {
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+td, th {
+    padding: 15px;
+    text-align: left;
+    
+}
+
+tr {
+    border-bottom: 1px solid #cccccc;
 }
