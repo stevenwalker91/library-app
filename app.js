@@ -4,7 +4,7 @@ const modalToggles = document.querySelectorAll('.toggleModal')
 const closeBtn = document.getElementById('closeModal');
 const newFormBtn = document.getElementById('newBook');
 const clearBtn = document.getElementById('clearForm');
-let deleteBtns = document.querySelectorAll('.delete-icon')
+const bookList = document.getElementById('bookList');
 
 //event listeners to handle inputs
 myform.addEventListener('submit', handleFormInput);
@@ -12,13 +12,15 @@ closeBtn.addEventListener('click', hideModal);
 newFormBtn.addEventListener('click', displayModal);
 window.addEventListener('keydown', handleKeyboardInput);
 clearBtn.addEventListener('click', clearForm);
-deleteBtns.forEach(btn => btn.addEventListener('click', function(){ deleteBook(this.dataset.reference) }));
+bookList.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-icon')) {
+        console.log(event.target.dataset.reference);
+        
+        deleteBook(event.target.dataset.reference);
+    }
+})
 
-//because buttons are generated after the event listener is set, need to recheck for buttons each time table items are added
-function reselectButtons(){
-    deleteBtns = document.querySelectorAll('.delete-icon')
-    deleteBtns.forEach(btn => btn.addEventListener('click', function(){ deleteBook(this.dataset.reference) }));
-}
+
 
 let myLibrary = [];
 
@@ -119,14 +121,17 @@ function generateTableContents(){
         if(book.visibleInLibrary) {
             return;
         }
-       
-        const row = document.createElement('tr');
    
+        //insert a new row and at end (-1) and then set the id as the array index
+        const row = table.insertRow(-1);
+        row.setAttribute('id', `book-${bookReference}`)
+
         //then loop over each key in the object
         Object.keys(book).forEach(key => {
             //omit the visible key as we don't want that displayesd
             if(key !== 'visibleInLibrary') {
-                row.innerHTML += `<td>${book[key]}</td>`;
+                let cell = row.insertCell() 
+                cell.innerHTML = `${book[key]}`
             }
         })
 
@@ -136,33 +141,33 @@ function generateTableContents(){
         table.appendChild(row);
         book.visibleInLibrary = true;
 
-        //calls fucntion to include newly created buttons for event listener
-        reselectButtons();
-
     })
 }
 
 
 
+
 //add function to delete a book
 function deleteBook(reference) {
-
-    const libraryReference = parseInt(reference);
-    const tableReference = libraryReference+1;
+    const table = document.getElementById('bookList');
+    const bookid = `book-${reference}`
+    console.log(bookid);
 
     myLibrary.splice(reference, 1);
+
+
+    const rowToBeDeleted = document.getElementById(`${bookid}`);
+    console.log(rowToBeDeleted);
+    rowToBeDeleted.remove();
+
     console.log(myLibrary);
-
-    const table = document.getElementById('bookList');
-
-    //doesn't work because table positoon will change
-    console.log(table.rows[tableReference]);
-    table.rows[tableReference].innerHTML ='';
-
 
 }
 //function changeReadStatus
 
 addBookToLibrary('The Hobbit', 'Tolkien', '304', 'Read');
+addBookToLibrary('A Game of Thrones', 'G.R.R Martin', '304', 'Read');
+addBookToLibrary('A Tale of Two Cities', 'Charles Dickens', '304', 'Read');
+addBookToLibrary('A fantasy book', 'Brandon Sanderson', '304', 'Read');
 
 
