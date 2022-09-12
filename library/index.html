@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="modal" id="newBookModal">
+        <div class="modal-content" >
+            
+            <form id="newBookForm">
+                <label for="bookName">Book Name:</label>
+                <input id="bookName" type="text">
+                <label for="authorName">Author:</label>
+                <input id="authorName" type="text">
+                <label for="pageCount">Page Count:</label>
+                <input id="pageCount" type="number">
+                <label for="readStatus">Read:</label>
+                <input id="readStatus" type="checkbox">
+                <button id="submitNewBook" type="submit">Submit</button>
+            </form>
+            <div id="closeContainer">
+                <span id="closeModal" class="close toggleModal">&times;</span>
+            </div>
+            
+            
+        </div>
+    </div>
+    <div id="application-container">
+        <button id="newBook" class="toggleModal">New Book</button>
+
+    </div>
+
+    
+</body>
+</html>
