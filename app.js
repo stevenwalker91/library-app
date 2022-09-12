@@ -151,17 +151,18 @@ function generateTableContents(){
 function deleteBook(reference) {
     const table = document.getElementById('bookList');
     const bookid = `book-${reference}`
-    console.log(bookid);
 
-    myLibrary.splice(reference, 1);
+    if (confirm('are you sure you wwant to delete?')) {
+        //remove the book from library
+        myLibrary.splice(reference, 1);
 
+        ///find table row with the index number of array as id number and delete that too
+        const rowToBeDeleted = document.getElementById(`${bookid}`);
+        rowToBeDeleted.remove();
+    }
 
-    const rowToBeDeleted = document.getElementById(`${bookid}`);
-    console.log(rowToBeDeleted);
-    rowToBeDeleted.remove();
 
     console.log(myLibrary);
-
 }
 //function changeReadStatus
 
