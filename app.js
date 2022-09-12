@@ -4,6 +4,7 @@ const modalToggles = document.querySelectorAll('.toggleModal')
 const closeBtn = document.getElementById('closeModal');
 const newFormBtn = document.getElementById('newBook');
 const clearBtn = document.getElementById('clearForm');
+let deleteBtns = document.querySelectorAll('.delete-icon')
 
 //event listeners to handle inputs
 myform.addEventListener('submit', handleFormInput);
@@ -11,6 +12,13 @@ closeBtn.addEventListener('click', hideModal);
 newFormBtn.addEventListener('click', displayModal);
 window.addEventListener('keydown', handleKeyboardInput);
 clearBtn.addEventListener('click', clearForm);
+deleteBtns.forEach(btn => btn.addEventListener('click', function(){ deleteBook(this.dataset.reference) }));
+
+//because buttons are generated after the event listener is set, need to recheck for buttons each time table items are added
+function reselectButtons(){
+    deleteBtns = document.querySelectorAll('.delete-icon')
+    deleteBtns.forEach(btn => btn.addEventListener('click', function(){ deleteBook(this.dataset.reference) }));
+}
 
 let myLibrary = [];
 
@@ -26,9 +34,8 @@ function Book(title, author, pages, read){
 function addBookToLibrary(book, author, pages, read){
     const newBook = new Book(book, author, pages, read);
     myLibrary.push(newBook);
-    //removeTableContents();
     generateTableContents();
-    console.log(myLibrary);
+
 }
 
 //event executed on submission of the form to retrieve values 
@@ -104,6 +111,8 @@ function generateTableContents(){
 
     //loop over each book in the library
     myLibrary.forEach(book => {
+        //get reference to be added to action icons
+        const bookReference = myLibrary.indexOf(book);
 
         //check if the book is already rendered and return if so
         //otherwise go on to render it
@@ -112,25 +121,46 @@ function generateTableContents(){
         }
        
         const row = document.createElement('tr');
-
+   
         //then loop over each key in the object
         Object.keys(book).forEach(key => {
             //omit the visible key as we don't want that displayesd
             if(key !== 'visibleInLibrary') {
                 row.innerHTML += `<td>${book[key]}</td>`;
             }
-            
         })
-        
+
+        //then add on the action buttons
+        row.innerHTML += `<td><div class="icon-container"><i class="fa-regular fa-pen-to-square edit-icon" data-reference="${bookReference}"></i><i class="fa-regular fa-trash-can delete-icon" data-reference="${bookReference}"></i></div></td>`;
         //add the book to the table then mark it as visible
         table.appendChild(row);
         book.visibleInLibrary = true;
+
+        //calls fucntion to include newly created buttons for event listener
+        reselectButtons();
+
     })
 }
 
 
-//add function to delete a book
 
+//add function to delete a book
+function deleteBook(reference) {
+
+    const libraryReference = parseInt(reference);
+    const tableReference = libraryReference+1;
+
+    myLibrary.splice(reference, 1);
+    console.log(myLibrary);
+
+    const table = document.getElementById('bookList');
+
+    //doesn't work because table positoon will change
+    console.log(table.rows[tableReference]);
+    table.rows[tableReference].innerHTML ='';
+
+
+}
 //function changeReadStatus
 
 addBookToLibrary('The Hobbit', 'Tolkien', '304', 'Read');

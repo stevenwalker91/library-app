@@ -136,3 +136,22 @@ td, th {
 tr {
     border-bottom: 1px solid #cccccc;
 }
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 20px;
+}
+
+i {
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: var(--primary-color);
+}
+
+.delete-icon:hover{
+    color:var(--error-color-primary);
+}
