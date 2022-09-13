@@ -119,7 +119,7 @@ button {
 }
 
 #bookList {
-
+    font-size: 12px;
 }
 
 table {
@@ -128,7 +128,7 @@ table {
 }
 
 td, th {
-    padding: 15px;
+    padding: 12px;
     text-align: left;
     
 }

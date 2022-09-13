@@ -14,9 +14,10 @@ window.addEventListener('keydown', handleKeyboardInput);
 clearBtn.addEventListener('click', clearForm);
 bookList.addEventListener('click', function(event) {
     if (event.target.classList.contains('delete-icon')) {
-        console.log(event.target.dataset.reference);
-        
         deleteBook(event.target.dataset.reference);
+    }
+    if (event.target.classList.contains('edit-icon')) {
+        
     }
 })
 
@@ -162,7 +163,6 @@ function deleteBook(reference) {
     }
 
 
-    console.log(myLibrary);
 }
 //function changeReadStatus
 
