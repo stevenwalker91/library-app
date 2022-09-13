@@ -17,6 +17,7 @@ bookList.addEventListener('click', function(event) {
     //find the specific row to be deleted and the object index in array
     const updateFields = findBookToUpdate(bookTitle);
 
+    //since the listener is on the entire table, check the target and execute function dependent on button clicked
     if (event.target.classList.contains('delete-icon')) {
         deleteBook(updateFields, bookTitle);
     }
@@ -179,7 +180,7 @@ function deleteBook(updateFields, bookTitle) {
 }
 
 
-
+//initalise the app with some dummy books for demo purpose
 addBookToLibrary('The Hobbit', 'Tolkien', '304', 'Read');
 addBookToLibrary('A Game of Thrones', 'G.R.R Martin', '304', 'Read');
 addBookToLibrary('A Tale of Two Cities', 'Charles Dickens', '304', 'Read');
