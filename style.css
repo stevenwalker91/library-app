@@ -35,9 +35,11 @@ label {
 }
 
 input, select {
+    -webkit-appearance: none;
     width: 200px;
     border: none;
     border-bottom: 1px solid #bcb9b9;
+    background-color: 
 }
 
 input:invalid:not(:placeholder-shown) {
