@@ -37,6 +37,8 @@ function Book(title, author, pages, read){
     this.visibleInLibrary = false;
 }
 
+//prototype function to toggle if the book is read or not
+//updates both the array object and the table that displays results
 Book.prototype.toggleRead = function (updateFields){
     if(this.read == 'Read'){
         this.read = 'Unread';
@@ -162,7 +164,7 @@ function generateTableContents(){
 function findBookToUpdate(reference){
     //get the row with the matching title
     const rowToBeEdited = document.getElementById(`${reference}`);
-    //search the array for object with matching title
+    //search the array for object with matching title and return the index number
     const bookToEdit = myLibrary.map(b => b.title).indexOf(`${reference}`);
     return({rowToBeEdited, bookToEdit});
 
