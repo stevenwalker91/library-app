@@ -13,15 +13,17 @@ newFormBtn.addEventListener('click', displayModal);
 window.addEventListener('keydown', handleKeyboardInput);
 clearBtn.addEventListener('click', clearForm);
 bookList.addEventListener('click', function(event) {
+    const bookTitle = event.target.dataset.reference;
+    //find the specific row to be deleted and the object index in array
+    const updateFields = findBookToUpdate(bookTitle);
+
     if (event.target.classList.contains('delete-icon')) {
-        deleteBook(event.target.dataset.reference);
+        deleteBook(updateFields, bookTitle);
     }
     if (event.target.classList.contains('edit-icon')) {
-        
+        myLibrary[`${updateFields.bookToEdit}`].toggleRead(updateFields.rowToBeEdited);
     }
 })
-
-
 
 let myLibrary = [];
 
@@ -32,6 +34,16 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.visibleInLibrary = false;
+}
+
+Book.prototype.toggleRead = function (updateFields){
+    if(this.read == 'Read'){
+        this.read = 'Unread';
+        updateFields.cells[3].innerHTML = 'Unread';
+    } else {
+        this.read = 'Read';
+        updateFields.cells[3].innerHTML = 'Read';
+    }
 }
 
 function addBookToLibrary(book, author, pages, read){
@@ -115,7 +127,7 @@ function generateTableContents(){
     //loop over each book in the library
     myLibrary.forEach(book => {
         //get reference to be added to action icons
-        const bookReference = myLibrary.indexOf(book);
+        const bookReference = book.title;
 
         //check if the book is already rendered and return if so
         //otherwise go on to render it
@@ -125,7 +137,7 @@ function generateTableContents(){
    
         //insert a new row and at end (-1) and then set the id as the array index
         const row = table.insertRow(-1);
-        row.setAttribute('id', `book-${bookReference}`)
+        row.setAttribute('id', `${bookReference}`)
 
         //then loop over each key in the object
         Object.keys(book).forEach(key => {
@@ -145,26 +157,28 @@ function generateTableContents(){
     })
 }
 
+//returns the index number of the object in array and the row item to be updated in table
+function findBookToUpdate(reference){
+    //get the row with the matching title
+    const rowToBeEdited = document.getElementById(`${reference}`);
+    //search the array for object with matching title
+    const bookToEdit = myLibrary.map(b => b.title).indexOf(`${reference}`);
+    return({rowToBeEdited, bookToEdit});
 
+}
 
 
 //add function to delete a book
-function deleteBook(reference) {
-    const table = document.getElementById('bookList');
-    const bookid = `book-${reference}`
-
-    if (confirm(`Are you sure you want to delete ${myLibrary[reference].title}?`)) {
+function deleteBook(updateFields, bookTitle) {
+    
+    if (confirm(`Are you sure you want to delete ${bookTitle}?`)) {
         //remove the book from library
-        myLibrary.splice(reference, 1);
-
-        ///find table row with the index number of array as id number and delete that too
-        const rowToBeDeleted = document.getElementById(`${bookid}`);
-        rowToBeDeleted.remove();
+        myLibrary.splice(updateFields.bookToEdit, 1);
+        updateFields.rowToBeEdited.remove();
     }
-
-
 }
-//function changeReadStatus
+
+
 
 addBookToLibrary('The Hobbit', 'Tolkien', '304', 'Read');
 addBookToLibrary('A Game of Thrones', 'G.R.R Martin', '304', 'Read');
