@@ -92,6 +92,9 @@ function handleKeyboardInput(event){
         case 'n':
             displayModal();
             break;
+        case '+':
+            displayModal();
+            break;
 
     }
 }
