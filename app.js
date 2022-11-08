@@ -29,25 +29,28 @@ bookList.addEventListener('click', function(event) {
 let myLibrary = [];
 
 //constructor object for creating new book object
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.visibleInLibrary = false;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.visibleInLibrary = false;
+    }
+
+    toggleRead(updateFields){
+        if(this.read == 'Read'){
+            this.read = 'Unread';
+            updateFields.cells[3].innerHTML = 'Unread';
+        } else {
+            this.read = 'Read';
+            updateFields.cells[3].innerHTML = 'Read';
+        }
+    }
+    
 }
 
-//prototype function to toggle if the book is read or not
-//updates both the array object and the table that displays results
-Book.prototype.toggleRead = function (updateFields){
-    if(this.read == 'Read'){
-        this.read = 'Unread';
-        updateFields.cells[3].innerHTML = 'Unread';
-    } else {
-        this.read = 'Read';
-        updateFields.cells[3].innerHTML = 'Read';
-    }
-}
+
 
 function addBookToLibrary(book, author, pages, read){
     const newBook = new Book(book, author, pages, read);
